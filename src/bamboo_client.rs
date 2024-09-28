@@ -2,14 +2,12 @@ use reqwest::Url;
 use serde::de::DeserializeOwned;
 
 use crate::{
-    days_calculator::{get_first_day_of_the_month, get_today},
-    model::{
+    config::Config, days_calculator::{get_first_day_of_the_month, get_today}, model::{
         add_timesheet_entry::add_entry_request::{AddEntryRequest, AddTimesheetEntry},
         get_timeoff_requests::timeoff_request::TimeOffRequest,
         get_timesheet_entries::timesheet_entry::TimsheetEntry,
         get_whos_out::time_off_entry::TimeOffEntry,
-    },
-    Config,
+    }
 };
 
 pub struct BambooClient<'a> {
