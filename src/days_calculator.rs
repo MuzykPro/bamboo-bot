@@ -1,4 +1,4 @@
-use chrono::{DateTime, Datelike, Local, Weekday};
+use chrono::{DateTime, Datelike, Local, NaiveDate, Weekday};
 
 pub fn get_eligible_days_this_month(
     working_days: &Vec<String>, 
@@ -43,6 +43,16 @@ pub fn get_working_days_this_month() -> Vec<String> {
     working_days
 }
 
+pub fn get_weekday(date_str: &str) -> Result<String, chrono::ParseError> {
+    // Parse the date string into a NaiveDate object
+    let date = NaiveDate::parse_from_str(date_str, "%Y-%m-%d")?;
+    // Format the date to get the full weekday name (e.g., "Monday")
+    let weekday = date.format("%A").to_string();
+    // Return the weekday name
+    Ok(weekday)
+}
+
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -82,6 +92,14 @@ mod tests {
         ].into_iter().map(|s| s.to_string()).collect();
 
         assert_eq!(expected_days, eligible_days);
+    }
+
+    #[test]
+    fn test_get_weekday() {
+        let day = "2024-09-23";
+        let weekday = get_weekday(day).expect("Error while extracting weekday");
+
+        assert_eq!(weekday, "Monday".to_string());
     }
 
 }

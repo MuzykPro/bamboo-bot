@@ -2,7 +2,7 @@ use std::io;
 
 use bambo_processor::BambooProcessor;
 use bamboo_client::BambooClient;
-use days_calculator::{get_eligible_days_this_month, get_working_days_this_month};
+use days_calculator::{get_eligible_days_this_month, get_weekday, get_working_days_this_month};
 use itertools::Itertools;
 
 mod bambo_processor;
@@ -37,18 +37,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     if bank_holidays.len() > 0 {
         println!("(!) Bank holidays this month:");
         for bank_holiday in bank_holidays.iter().sorted() {
-            println!("{bank_holiday}");
+            println!("{bank_holiday} ({})", get_weekday(bank_holiday)?);
         }
     }
     if vacation_days.len() > 0 {
         println!("(!) You have vacation this month:");
         for vacation_day in vacation_days.iter().sorted() {
-            println!("{vacation_day}");
+            println!("{vacation_day} ({})", get_weekday(&vacation_day)?);
         }
     }
     println!("This month you are missing following days:");
     for day in eligible_days.iter().sorted() {
-        println!("{day}");
+        println!("{day} ({})", get_weekday(day)?);
     }
 
     println!(
