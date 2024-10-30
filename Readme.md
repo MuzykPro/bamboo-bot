@@ -1,5 +1,10 @@
 # Bamboo Timesheet Bot
 
+## Features
+
+- sending entries in batch (whole month) or individually
+- vacation and bank holidays supported
+
 ## Usage
 
 ### Install Rust
