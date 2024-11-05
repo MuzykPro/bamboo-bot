@@ -1,7 +1,10 @@
 # Bamboo Timesheet Bot
 
+Simple CLI program to automatically fill BambooHR timesheets 
+
 ## Features
 
+- filling monday-friday timesheets with 8am - 4pm hours
 - sending entries in batch (whole month) or individually
 - vacation and bank holidays supported
 
